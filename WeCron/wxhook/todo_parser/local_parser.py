@@ -235,6 +235,9 @@ class LocalParser(object):
         if day > 31:
             raise ParseError(u'/:no亲，一个月哪有%s天！' % day)
         self.now = self.now.replace(day=day)
+        # 2016年12月14日周三在上海举办的2016 Google 开发者大会
+        if self.consume_word(u'周', u'星期'):
+            self.consume_word(u'日', u'天') or self.consume_digit()
         # set default time
         if not self.consume_hour():
             self.now = self.now.replace(hour=DEFAULT_HOUR, minute=DEFAULT_MINUTE)

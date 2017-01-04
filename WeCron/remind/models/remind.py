@@ -53,7 +53,7 @@ class Remind(models.Model):
         """Returns 11小时28分后"""
         return nature_time(self.time)
 
-    def nature_time_defer(self):
+    def humanize_defer(self):
         if not self.defer:
             return '准时'
         units = [('周', 10080), ('天', 1440), ('小时', 60), ('分钟', 1)]
@@ -110,8 +110,8 @@ class Remind(models.Model):
                                    "value": self.local_time_string('Y/n/d(D) G:i'),
                                },
                                "remark": {
-                                   "value": "提醒时间：" + self.nature_time_defer()
-                                            + ('\n重复周期：' + self.get_repeat_text()) if self.has_repeat() else '',
+                                   "value": "提醒时间：" + self.humanize_defer()
+                                            + ('\n重复周期：' + self.humanize_repeat()) if self.has_repeat() else '',
                                }
                         },
                     )
@@ -139,7 +139,7 @@ class Remind(models.Model):
     def has_repeat(self):
         return self.repeat and len(self.repeat) >= 4 and self.repeat != [0]*len(self.repeat)
 
-    def get_repeat_text(self):
+    def humanize_repeat(self):
         if self.has_repeat():
             # TODO: we don't support hour and minute now
             repeat_names = ('年', '月', '天', '周', '小时', '分钟')

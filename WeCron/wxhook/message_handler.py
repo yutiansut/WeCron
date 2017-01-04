@@ -50,7 +50,7 @@ class WechatMessage(object):
                 '时间: %s' % reminder.local_time_string()
             ]
             if reminder.has_repeat():
-                reply_lines.append('重复: %s' % reminder.get_repeat_text())
+                reply_lines.append('重复: %s' % reminder.humanize_repeat())
             # TODO: add \U0001F449 to the left of 修改
             reply_lines.append('\n<a href="%s">修改</a>' % reminder.get_absolute_url(True))
             return self.text_reply('\n'.join(reply_lines))

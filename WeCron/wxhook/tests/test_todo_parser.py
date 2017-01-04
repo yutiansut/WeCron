@@ -272,7 +272,7 @@ class LocalParserTestCase(TestCase):
         reminder = self.parse(text)
         self.assertEqual(reminder.desc, text)
         self.assertEqual(reminder.title(), '生日')
-        self.assertEqual(reminder.get_repeat_text(), '每年')
+        self.assertEqual(reminder.humanize_repeat(), '每年')
         self.assertEqual(reminder.time.month, 1)
         self.assertEquals(reminder.time.day, 22)
         self.assertEquals(reminder.time.hour, DEFAULT_HOUR)
@@ -285,7 +285,7 @@ class LocalParserTestCase(TestCase):
         reminder = self.parse(text)
         self.assertEqual(reminder.desc, text)
         self.assertEqual(reminder.title(), '还信用卡')
-        self.assertEqual(reminder.get_repeat_text(), '每月')
+        self.assertEqual(reminder.humanize_repeat(), '每月')
         self.assertEqual(self.now.month, reminder.time.month)
         self.assertEquals(reminder.time.day, 20)
         self.assertEquals(reminder.time.hour, DEFAULT_HOUR)
@@ -296,14 +296,14 @@ class LocalParserTestCase(TestCase):
         _now = remind.now()
         remind.now = lambda: _now.replace(day=21)
         reminder = self.parse(text)
-        self.assertEqual(reminder.get_repeat_text(), '每月')
+        self.assertEqual(reminder.humanize_repeat(), '每月')
         self.assertEqual((self.now + relativedelta(months=1)).month, reminder.time.month)
 
     def test_parse_repeat_day(self):
         text = '每天晚上8点'
         reminder = self.parse(text)
         self.assertEqual(reminder.desc, text)
-        self.assertEqual(reminder.get_repeat_text(), '每天')
+        self.assertEqual(reminder.humanize_repeat(), '每天')
         self.assertEquals(reminder.time.hour, 20)
         self.assertEquals(reminder.time.minute, 0)
 
@@ -313,7 +313,7 @@ class LocalParserTestCase(TestCase):
             self.setUp()
             reminder = self.parse(text)
             self.assertEqual(reminder.desc, text)
-            self.assertEqual(reminder.get_repeat_text(), '每2周')
+            self.assertEqual(reminder.humanize_repeat(), '每2周')
             self.assertEquals(reminder.time.hour, 10)
             self.assertEquals(reminder.time.minute, 0)
 
@@ -322,7 +322,7 @@ class LocalParserTestCase(TestCase):
         text = '每两小时'
         reminder = self.parse(text)
         self.assertEqual(reminder.desc, text)
-        self.assertEqual(reminder.get_repeat_text(), '每2小时')
+        self.assertEqual(reminder.humanize_repeat(), '每2小时')
         self.assertEquals((self.now + relativedelta(hours=2)).hour, reminder.time.hour)
         self.assertEquals(reminder.time.minute, self.now.minute)
 
