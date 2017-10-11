@@ -11,3 +11,7 @@
 [![二维码](http://wx3.sinaimg.cn/mw690/ac472348ly1fildd8hmgzj2076076dga.jpg)](http://wecron.betacat.io)
 
 _With great thanks to [wechatpy](http://docs.wechatpy.org)!_
+
+<a target='_blank' rel='nofollow' href='https://app.codesponsor.io/link/G8ZV529iq7CuaDw7NF5Qfy7h/polyrabbit/WeCron'>
+  <img alt='Sponsor' width='888' height='68' src='https://app.codesponsor.io/embed/G8ZV529iq7CuaDw7NF5Qfy7h/polyrabbit/WeCron.svg' />
+</a>
